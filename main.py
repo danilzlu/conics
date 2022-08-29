@@ -6,8 +6,8 @@ a = 3
 b = 2
 e = np.sqrt(1 - b**2/a**2)
 c = np.sqrt(a**2 - b**2)
-radiusColor = BLUE
-ellipdDotColor = RED
+radiusColor = ORANGE
+ellipsDotColor = RED
 
 
 def norm(v):
@@ -81,34 +81,38 @@ class CircleIntro(Scene):
         self.wait()
 
 
+def ellips_get_dot(t):
+    return np.array([
+        a * np.sin(t),
+        b * np.cos(t),
+        0
+    ])
+
+
 class EllipsDefi(Scene):
     def construct(self):
-        def ellips_get_dot(t):
-            return np.array([
-                a * np.sin(t),
-                b * np.cos(t),
-                0
-            ])
+
 
         ellipsT = ValueTracker(0)
+        ellips = ParametricFunction(ellips_get_dot, t_range=np.array([0, TAU]), fill_opacity=0).set_color(ellipsDotColor)
 
         ellipsDefiSumFormula = MathTex("|F_1", "O", "| + |F_2", "O", "| = ", "2a")
-        ellipsDefiSumFormula[1].set_color(ellipdDotColor)
-        ellipsDefiSumFormula[3].set_color(ellipdDotColor)
+        ellipsDefiSumFormula[1].set_color(ellipsDotColor)
+        ellipsDefiSumFormula[3].set_color(ellipsDotColor)
         ellipsDefiSumFormula[5].set_color(radiusColor)
         cornerDefiSumFormula = ellipsDefiSumFormula.copy().to_corner(UP + LEFT)
 
-        ellipsDot = Dot(ellips_get_dot(ellipsT.get_value()), color=RED).set_color(ellipdDotColor)
+        ellipsDot = Dot(ellips_get_dot(ellipsT.get_value()), color=RED).set_color(ellipsDotColor)
         ellipsDot.add_updater(
             lambda mob: mob.become(
-                Dot(ellips_get_dot(ellipsT.get_value()), color=RED).set_color(ellipdDotColor)
+                Dot(ellips_get_dot(ellipsT.get_value()), color=RED).set_color(ellipsDotColor)
             )
         )
-        ellipsDotName = MathTex("O").next_to(ellipsDot.get_center()).set_color(ellipdDotColor)
+        ellipsDotName = MathTex("O").next_to(ellipsDot.get_center()).set_color(ellipsDotColor)
         ellipsDotName.add_updater(
             lambda mob: mob.become(
                 MathTex("O").next_to(ellips_get_dot(ellipsT.get_value()),
-                                     norm(ellips_get_dot(ellipsT.get_value()))).set_color(ellipdDotColor)
+                                     norm(ellips_get_dot(ellipsT.get_value()))).set_color(ellipsDotColor)
             )
         )
 
@@ -141,11 +145,6 @@ class EllipsDefi(Scene):
             )
         )
 
-
-
-
-
-
         self.play(Write(ellipsDefiSumFormula))
         self.play(Transform(ellipsDefiSumFormula, cornerDefiSumFormula))
         self.play(Create(VGroup(F1, F2)), Write(f1Name), Write(f2Name))
@@ -158,10 +157,74 @@ class EllipsDefi(Scene):
         self.add_foreground_mobjects(ellipsDot)
         self.play(Write(ellipsDotName))
         self.add(radius1, radius2)
+        self.remove(radius21, radius11)
         self.play(Uncreate(radius11), Uncreate(radius21))
         self.wait()
         self.add(TracedPath(ellipsDot.get_center, stroke_color=ellipsDot.get_color()))
         self.play(ellipsT.animate.set_value(2 * PI), run_time=8)
+        self.wait()
+        self.add(ellips)
+        self.play(FadeOut(ellipsDefiSumFormula))
+        self.play(FadeOut(ellipsDotName), FadeOut(f1Name), FadeOut(f2Name), FadeOut(ellipsDot),
+                  FadeOut(F1), FadeOut(F2), FadeOut(radius1), FadeOut(radius2), FadeOut(radiusName))
+        self.wait()
+
+
+class EllipsFormula(Scene):
+    def construct(self):
+        ellips = ParametricFunction(ellips_get_dot, t_range=np.array([0, TAU]), fill_opacity=0).set_color(
+            ellipsDotColor)
+
+        grid = NumberPlane()
+        grid = NumberPlane(x_range = (-4, 4, 1),
+                            y_range = (-3, 3, 1))
+        f1 = Dot((-c, 0, 0)).shift(3.5*LEFT)
+        f2 = Dot((c, 0, 0)).shift(3.5*LEFT)
+        f1Name = MathTex("F_1").next_to(f1, DOWN)
+        f2Name = MathTex("F_2").next_to(f2, DOWN)
+        f1Coords = MathTex("(-c, 0)").next_to(f1, DOWN + RIGHT/2)
+        f2Coords = MathTex("( c, 0)").next_to(f2, DOWN)
+
+        t0 = 2/3
+        oDot = Dot(ellips_get_dot(t0)).set_color(ellipsDotColor).shift(3.5*LEFT)
+        radius1 = Line(f1.get_center(), oDot.get_center()).set_color(radiusColor)
+        radius2 = Line(oDot.get_center(), f2.get_center()).set_color(radiusColor)
+        radius1Name = MathTex("r_1").next_to(radius1, LEFT).set_color(radiusColor).shift(RIGHT/2)
+        radius2Name = MathTex("r_2").next_to(radius2, LEFT).set_color(radiusColor)
+
+
+        ellipsGroup = VGroup(ellips, grid)
+
+        ellipsGroup.generate_target()
+        ellipsGroup.target.shift(3.5*LEFT)
+
+        formula01 = MathTex("|F_1O|", " + ", "|F_2O|", " = 2a").to_corner(UP + RIGHT)
+        formula02 = MathTex("r_1", " + ", "r_2", " = 2a", "\\ \\Big|\\ r_1 - r_2").to_corner(UP + RIGHT)
+        formula03 = MathTex("(r_1 + r_2)(r_1 - r_2)", " = ", "2a", "(r_1 - r_2)").next_to(formula02, DOWN).shift(LEFT)
+        formula04 = MathTex("r_1^2 - r_2^2", " = ", "2a", "(r_1 - r_2)").next_to(formula03, DOWN)
+
+
+
+        self.add_foreground_mobjects(ellips)
+        self.add(grid)
+        #self.play(ReplacementTransform(grid, grid2))
+        self.play(MoveToTarget(ellipsGroup))
+        self.play(Write(formula01))
+        self.play(ReplacementTransform(formula01, formula02[:4]))
+        self.play(Write(formula02[4:]))
+        self.play(
+            TransformFromCopy(VGroup(formula02[:2], formula02[-1]), formula03[0]),
+            TransformFromCopy(formula02[3], formula03[1:-1]),
+            TransformFromCopy(formula02[-1], formula03[-1]),
+            run_time = 4
+        )
+        self.play(
+            TransformFromCopy(formula03, formula04),
+            run_time=2
+        )
+        self.play(Create(f1), Create(f2), Write(f1Name), Write(f2Name))
+        self.play(Transform(f1Name, f1Coords), Transform(f2Name, f2Coords))
+        self.play(Create(radius1), Create(radius2), Create(oDot), Create(radius1Name), Create(radius2Name))
         self.wait()
 
 
