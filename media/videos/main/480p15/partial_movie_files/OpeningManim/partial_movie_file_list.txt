@@ -1,0 +1,11 @@
+# This file is used internally by FFMPEG.
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/OpeningManim/3163782288_809169405_223132457.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/OpeningManim/2201830969_329969645_3037081588.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/OpeningManim/2201830969_3016986995_2676669394.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/OpeningManim/2201830969_329969645_2131743143.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/OpeningManim/2201830969_1057863146_840045898.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/OpeningManim/2201830969_329969645_2850687529.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/OpeningManim/2201830969_1531100185_1720801501.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/OpeningManim/2201830969_329969645_3665043635.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/OpeningManim/2201830969_3216265664_3469530781.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/OpeningManim/2201830969_329969645_616559432.mp4'

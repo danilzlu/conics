@@ -1,0 +1,10 @@
+# This file is used internally by FFMPEG.
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/EllipsDefi/3163782288_2851972833_223132457.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/EllipsDefi/2201830969_2001886805_3854702276.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/EllipsDefi/2201830969_575572846_3239402701.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/EllipsDefi/2201830969_2784227075_1965871598.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/EllipsDefi/2201830969_329969645_526951435.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/EllipsDefi/2201830969_1665413548_1834248943.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/EllipsDefi/2201830969_329969645_1850826729.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/EllipsDefi/2201830969_4224987844_3582754815.mp4'
+file 'file:D:/PyCharmProjectsD/conics/media/videos/main/480p15/partial_movie_files/EllipsDefi/2201830969_3604166955_1344996344.mp4'
